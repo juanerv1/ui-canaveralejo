@@ -1,4 +1,3 @@
-import API_BASE_URL from "./config";
 
 // ===============================
 // ESTADO GLOBAL DEL MODAL

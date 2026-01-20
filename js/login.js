@@ -1,4 +1,3 @@
-import API_BASE_URL from "./config";
 
 if (localStorage.getItem("token")) {
   window.location.href = "/index.html";

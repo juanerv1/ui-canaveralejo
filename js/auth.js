@@ -1,4 +1,3 @@
-import API_BASE_URL from "./config";
 
 async function getCurrentUser() {
   const token = localStorage.getItem("token");
