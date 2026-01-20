@@ -11,7 +11,7 @@ function initReportes() {
   const reportesBody = document.getElementById("reportesBody");
 
   async function cargarReportes() {
-    const res = await fetch(`${API_BASE_URL}/admin/reportes/detailed`, {
+    const res = await fetch(`${window.API_BASE_URL}/admin/reportes/detailed`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
@@ -60,7 +60,7 @@ document.getElementById("confirmExportBtn").onclick = async () => {
   const token = localStorage.getItem("token");
 
   const res = await fetch(
-    `${API_BASE_URL}/excel/?reporte_id=${reporteSeleccionadoId}`,
+    `${window.API_BASE_URL}/excel/?reporte_id=${reporteSeleccionadoId}`,
     {
       headers: {
         Authorization: `Bearer ${token}`

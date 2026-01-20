@@ -12,7 +12,7 @@ window.initClienteScreen = async () => {
   if (!clienteId) return;
 
   // ===== CLIENTE =====
-  const c = await fetch(`${API_BASE_URL}/admin/clientes/${clienteId}`, {
+  const c = await fetch(`${window.API_BASE_URL}/admin/clientes/${clienteId}`, {
   headers: {
     "Authorization": `Bearer ${token}`
   }
@@ -34,7 +34,7 @@ window.initClienteScreen = async () => {
   if (editNombre) editNombre.value = c.nombre;
 
   // ===== VEHÍCULOS =====
-  const vehiculos = await fetch(`${API_BASE_URL}/admin/vehiculos/cliente/${clienteId}`, {
+  const vehiculos = await fetch(`${window.API_BASE_URL}/admin/vehiculos/cliente/${clienteId}`, {
   headers: {
     "Authorization": `Bearer ${token}`
   }
@@ -52,7 +52,7 @@ window.initClienteScreen = async () => {
   }
 
   // ===== LLANTAS =====
-  const llantas = await fetch(`${API_BASE_URL}/admin/llantas/cliente/${clienteId}`, {
+  const llantas = await fetch(`${window.API_BASE_URL}/admin/llantas/cliente/${clienteId}`, {
   headers: {
     "Authorization": `Bearer ${token}`
   }
@@ -90,8 +90,8 @@ window.initClienteScreen = async () => {
   // ===== GUARDAR VARIABLES CLIENTE =====
   window.guardarVariableCliente = async () => {
     const bulkEndpoints = {
-      vehiculos: `${API_BASE_URL}/admin/vehiculos/bulk-insert/${clienteId}`,
-      llantas: `${API_BASE_URL}/admin/llantas/bulk-insert/${clienteId}`
+      vehiculos: `${window.API_BASE_URL}/admin/vehiculos/bulk-insert/${clienteId}`,
+      llantas: `${window.API_BASE_URL}/admin/llantas/bulk-insert/${clienteId}`
     };
 
     try {
@@ -114,7 +114,7 @@ window.initClienteScreen = async () => {
       // ===== MANUAL =====
       if (!modalState.bulk) {
         if (modalState.tipo === "vehiculos") {
-          await fetch(`${API_BASE_URL}/admin/vehiculos/`, {
+          await fetch(`${window.API_BASE_URL}/admin/vehiculos/`, {
             method: "POST",
               headers: {
               "Authorization": `Bearer ${token}`,
@@ -141,7 +141,7 @@ window.initClienteScreen = async () => {
             return;
           }
 
-          await fetch(`${API_BASE_URL}/admin/llantas/` , {
+          await fetch(`${window.API_BASE_URL}/admin/llantas/` , {
             method: "POST",
               headers: {
                 "Authorization": `Bearer ${token}`,

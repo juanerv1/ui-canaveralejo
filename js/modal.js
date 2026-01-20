@@ -217,19 +217,19 @@ async function cargarAutocomplete(url, datalistId, campo) {
 // INIT AUTOCOMPLETE LLANTA
 function initLlantaAutocomplete() {
   cargarAutocomplete(
-    `${API_BASE_URL}/admin/catalogos/marcas`,
+    `${window.API_BASE_URL}/admin/catalogos/marcas`,
     "marcasList",
     document.getElementById("marcaInput")
   );
 
   cargarAutocomplete(
-    `${API_BASE_URL}/admin/catalogos/disenos`,
+    `${window.API_BASE_URL}/admin/catalogos/disenos`,
     "disenosList",
     document.getElementById("disenoInput")
   );
 
   cargarAutocomplete(
-    `${API_BASE_URL}/admin/catalogos/dimensiones`,
+    `${window.API_BASE_URL}/admin/catalogos/dimensiones`,
     "dimensionesList",
     document.getElementById("dimensionInput")
   );

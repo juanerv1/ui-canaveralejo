@@ -29,7 +29,7 @@ function initClientes() {
         const fd = new FormData();
         fd.append("file", modalState.file);
 
-        await fetch(`${API_BASE_URL}/admin/clientes/bulk-insert`, {
+        await fetch(`${window.API_BASE_URL}/admin/clientes/bulk-insert`, {
           method: "POST",
             headers: {
               "Authorization": `Bearer ${token}`
@@ -38,7 +38,7 @@ function initClientes() {
         });
 
       } else {
-        await fetch(`${API_BASE_URL}/admin/clientes/`, {
+        await fetch(`${window.API_BASE_URL}/admin/clientes/`, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -61,7 +61,7 @@ function initClientes() {
   };
 
     async function cargarClientes() {
-    const res = await fetch(`${API_BASE_URL}/admin/clientes/`, {
+    const res = await fetch(`${window.API_BASE_URL}/admin/clientes/`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
