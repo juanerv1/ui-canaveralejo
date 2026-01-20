@@ -1,0 +1,99 @@
+<div class="content-wrapper animate-fade-in">
+
+  <div class="breadcrumb" id="breadcrumb"></div>
+
+  <section class="cliente-info">
+    <div>
+      <h2 id="clienteNombre"></h2>
+      <p>NIT: <span id="clienteNit"></span></p>
+    </div>
+  </section>
+
+  <div class="horizontal-sections">
+
+    <!-- VEHÍCULOS -->
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Vehículos</h3>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            data-entity="clientes_variables"
+            data-tipo="vehiculos"
+            data-bulk="true"
+          >
+            📁 CSV
+          </button>
+          <button
+            class="btn btn-primary"
+            data-entity="clientes_variables"
+            data-tipo="vehiculos"
+            data-bulk="false"
+          >
+            + Vehículo
+          </button>
+        </div>
+      </div>
+
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>No Llantas</th>
+                <th class="text-center">Estado</th>
+
+            </tr>
+          </thead>
+          <tbody id="vehiculosBody"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+    <!-- LLANTAS -->
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Llantas</h3>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            data-entity="clientes_variables"
+            data-tipo="llantas"
+            data-bulk="true"
+          >
+            📁 CSV
+          </button>
+          <button
+            class="btn btn-primary"
+            data-entity="clientes_variables"
+            data-tipo="llantas"
+            data-bulk="false"
+          >
+            + Llanta
+          </button>
+        </div>
+      </div>
+
+
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Marca</th>
+                <th>Diseno</th>
+                <th>Dimension</th>
+                <th>ConvRadial</th>
+                <th>Montaje</th>
+                <th>Estado</th>                
+            </tr>
+          </thead>
+          <tbody id="llantasBody"></tbody>
+        </table>
+      </div>
+
+    </section>
+
+  </div>
+</div>

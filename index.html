@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard Llantas</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-truck-monster"></i>
+            </div>
+            <span>Agro<span class="accent">App</span></span>
+        </div>
+        
+        <nav class="nav-menu">
+            <p class="nav-label">Menú Principal</p>
+            <a href="#" class="nav-link" data-page="home">
+                <i class="fa-solid fa-house"></i> <span>Inicio</span>
+            </a>
+            <a href="#" class="nav-link" data-page="clientes">
+                <i class="fa-solid fa-users"></i> <span>Clientes</span>
+            </a>
+            <a href="#" class="nav-link" data-page="variables">
+                <i class="fa-solid fa-truck-ramp-box"></i> <span>Variables</span>
+            </a>                
+            <a href="#" class="nav-link" data-page="reportes">
+                <i class="fa-solid fa-chart-line"></i> <span>Reportes</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="avatar">JR</div>
+                <div class="details">
+                    <p class="name">Juan Rodriguez</p>
+                    <p class="role">Administrador</p>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <header class="header">
+            <h1 id="view-title">Dashboard</h1>
+            <div class="header-actions">
+                <button class="btn-icon"><i class="fa-solid fa-bell"></i></button>
+                <button id="logOutBtn" class="btn-logout">Cerrar Sesión</button>
+            </div>
+        </header>
+
+        <div id="content-area">
+            </div>
+    </main>
+</div>
+  <!-- GLOBAL MODAL -->
+  <div class="overlay" id="modalOverlay" style="display:none">
+    <div class="modal">
+
+      <h3 id="modalTitle"></h3>
+
+      <!-- CLIENTE -->
+      <div id="manualClientSection" class="form-grid" style="display:none">
+        <div>
+          <label>Nombre</label>
+          <input type="text" id="clienteNombreInput" autocomplete="off" />
+        </div>
+        <div>
+          <label>NIT</label>
+          <input type="text" id="clienteNitInput" autocomplete="off" />
+        </div>
+      </div>
+
+      <!-- VEHICULO -->
+      <div id="manualVehiculoSection" class="form-grid" style="display:none">
+        <div>
+          <label>Código vehículo</label>
+          <input type="text" id="vehiculoCodigoInput" autocomplete="off" />
+        </div>
+        <div>
+          <label>No. llantas</label>
+          <input type="number" id="vehiculoLlantasInput" min="0" />
+        </div>
+      </div>
+
+      <!-- LLANTA -->
+      <div id="manualLlantaSection" class="form-grid" style="display:none">
+        <div>
+          <label>Código llanta</label>
+          <input type="text" id="llantaCodigoInput" autocomplete="off" />
+        </div>
+
+        <div>
+          <label>Marca</label>
+          <input type="text" id="marcaInput" list="marcasList" autocomplete="off" />
+          <datalist id="marcasList"></datalist>
+        </div>
+
+        <div>
+          <label>Diseño</label>
+          <input type="text" id="disenoInput" list="disenosList" autocomplete="off" />
+          <datalist id="disenosList"></datalist>
+        </div>
+
+        <div>
+          <label>Dimensión</label>
+          <input type="text" id="dimensionInput" list="dimensionesList" autocomplete="off" />
+          <datalist id="dimensionesList"></datalist>
+        </div>
+
+        <div>
+          <label>Construcción</label>
+          <select id="convRadialSelect">
+            <option value="R">Radial</option>
+            <option value="C">Convexa</option>
+          </select>
+        </div>
+
+        <div>
+            <label for="fechaMontaje">Fecha de Montaje</label>
+            <input type="date" id="fechaMontaje" class="input-date">
+        </div>
+
+      </div>
+
+      <div id="catalogoSimpleFields" style="display:none">
+        <label id="catalogLabel">Nombre</label>
+        <input type="text" id="catalogNombreInput" />
+      </div>
+
+      <!-- CSV -->
+      <div id="fileSection" style="display:none">
+        <div class="drop-zone" id="dropZone">
+          <p>Arrastra el CSV</p>
+          <span id="fileName"></span>
+        </div>
+        <input type="file" id="fileInput" hidden />
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="cancelarBtn">Cancelar</button>
+        <button type="button" id="guardarBtn">Guardar</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EXPORTAR REPORTE MODAL -->
+  <div class="overlay" id="exportReporteModal" style="display:none">
+    <div class="modal modal-sm">
+      <h3>Exportar reporte</h3>
+
+      <p>¿Deseas exportar este reporte a Excel?</p>
+
+      <div class="modal-actions">
+        <button id="cancelExportBtn" class="btn btn-outline">Cancelar</button>
+        <button id="confirmExportBtn" class="btn btn-primary">
+          Exportar Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+<script src="js/router.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/variables.js"></script>
+<script src="js/cliente.js"></script>
+<script src="js/reportes.js"></script>
+<script src="js/home.js"></script>
+<script src="js/auth.js"></script>
+
+
+</body>
+</html>
+
+

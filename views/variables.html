@@ -1,0 +1,110 @@
+<div class="content-wrapper animate-fade-in">
+
+  <div class="home-header">
+    <h1 class="text-gradient">Variables</h2>
+    <p class="subtitle">
+      Panel de administracion de variables de llantas, marcas, diseños y dimensiones
+    </p>
+  </div>
+
+  <div class="horizontal-sections">
+
+    <!-- Marcas -->
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Marcas</h3>
+          <div class="actions">
+            <button
+              class="btn btn-secondary"
+              data-entity="variables"
+              data-tipo="marca"
+              data-bulk="true"
+            >
+              📁 CSV
+            </button>
+
+            <button
+              class="btn btn-primary"
+              data-entity="variables"
+              data-tipo="marca"
+              data-bulk="false"
+            >
+              + Agregar
+            </button>
+          </div>
+
+      </div>
+
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <tbody id="marcasBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Diseños -->
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Diseños</h3>
+          <div class="actions">
+            <button
+              class="btn btn-secondary"
+              data-entity="variables"
+              data-tipo="diseno"
+              data-bulk="true"
+            >
+              📁 CSV
+            </button>
+
+            <button
+              class="btn btn-primary"
+              data-entity="variables"
+              data-tipo="diseno"
+              data-bulk="false"
+            >
+              + Agregar
+            </button>
+          </div>
+      </div>
+
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <tbody id="disenosBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Dimensiones -->
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Dimensiones</h3>
+          <div class="actions">
+            <button
+              class="btn btn-secondary"
+              data-entity="variables"
+              data-tipo="dimension"
+              data-bulk="true"
+            >
+              📁 CSV
+            </button>
+
+            <button
+              class="btn btn-primary"
+              data-entity="variables"
+              data-tipo="dimension"
+              data-bulk="false"
+            >
+              + Agregar
+            </button>
+          </div>
+      </div>
+
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <tbody id="dimensionesBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+</div>
