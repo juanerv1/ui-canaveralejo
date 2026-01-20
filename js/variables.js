@@ -1,3 +1,5 @@
+import API_BASE_URL from "./config";
+
 function initVariables() {
   console.log("✔ initVariables");
 
@@ -31,7 +33,7 @@ function initVariables() {
         const fd = new FormData();
         fd.append("file", modalState.file);
 
-        await fetch(`http://44.202.184.61${endpoints[modalState.tipo]}/bulk-upload`, {
+        await fetch(`${API_BASE_URL}${endpoints[modalState.tipo]}/bulk-upload`, {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`
@@ -40,7 +42,7 @@ function initVariables() {
         });
 
       } else {
-        await fetch(`http://44.202.184.61${endpoints[modalState.tipo]}`, {
+        await fetch(`${API_BASE_URL}${endpoints[modalState.tipo]}`, {
           method: "POST",
           headers: { 
             Authorization: `Bearer ${token}`,
@@ -61,9 +63,9 @@ function initVariables() {
   };
 
   function cargarTodo() {
-    cargar("http://44.202.184.61/admin/catalogos/marcas", "marcasBody");
-    cargar("http://44.202.184.61/admin/catalogos/disenos", "disenosBody");
-    cargar("http://44.202.184.61/admin/catalogos/dimensiones", "dimensionesBody");
+    cargar(`${API_BASE_URL}/admin/catalogos/marcas`, "marcasBody");
+    cargar(`${API_BASE_URL}/admin/catalogos/disenos`, "disenosBody");
+    cargar(`${API_BASE_URL}/admin/catalogos/dimensiones`, "dimensionesBody");
   }
 
   async function cargar(endpoint, tbodyId) {

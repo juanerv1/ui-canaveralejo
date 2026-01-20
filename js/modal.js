@@ -1,3 +1,5 @@
+import API_BASE_URL from "./config";
+
 // ===============================
 // ESTADO GLOBAL DEL MODAL
 // ===============================
@@ -216,19 +218,19 @@ async function cargarAutocomplete(url, datalistId, campo) {
 // INIT AUTOCOMPLETE LLANTA
 function initLlantaAutocomplete() {
   cargarAutocomplete(
-    "http://44.202.184.61/admin/catalogos/marcas",
+    `${API_BASE_URL}/admin/catalogos/marcas`,
     "marcasList",
     document.getElementById("marcaInput")
   );
 
   cargarAutocomplete(
-    "http://44.202.184.61/admin/catalogos/disenos",
+    `${API_BASE_URL}/admin/catalogos/disenos`,
     "disenosList",
     document.getElementById("disenoInput")
   );
 
   cargarAutocomplete(
-    "http://44.202.184.61/admin/catalogos/dimensiones",
+    `${API_BASE_URL}/admin/catalogos/dimensiones`,
     "dimensionesList",
     document.getElementById("dimensionInput")
   );

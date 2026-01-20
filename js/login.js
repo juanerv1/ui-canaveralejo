@@ -1,3 +1,5 @@
+import API_BASE_URL from "./config";
+
 if (localStorage.getItem("token")) {
   window.location.href = "/index.html";
 }
@@ -9,7 +11,7 @@ document.getElementById("btnLogin").onclick = async () => {
 
 
 
-  const res = await fetch("http://44.202.184.61/auth/login", {
+  const res = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ username, password })

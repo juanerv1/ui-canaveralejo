@@ -1,3 +1,5 @@
+import API_BASE_URL from "./config";
+
 function initClientes() {
   console.log("✔ initClientes");
 
@@ -28,7 +30,7 @@ function initClientes() {
         const fd = new FormData();
         fd.append("file", modalState.file);
 
-        await fetch("http://44.202.184.61/admin/clientes/bulk-insert", {
+        await fetch(`${API_BASE_URL}/admin/clientes/bulk-insert`, {
           method: "POST",
             headers: {
               "Authorization": `Bearer ${token}`
@@ -37,7 +39,7 @@ function initClientes() {
         });
 
       } else {
-        await fetch("http://44.202.184.61/admin/clientes/", {
+        await fetch(`${API_BASE_URL}/admin/clientes/`, {
           method: "POST",
           headers: {
             "Authorization": `Bearer ${token}`,
@@ -60,7 +62,7 @@ function initClientes() {
   };
 
     async function cargarClientes() {
-    const res = await fetch("http://44.202.184.61/admin/clientes/", {
+    const res = await fetch(`${API_BASE_URL}/admin/clientes/`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }

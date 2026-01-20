@@ -1,3 +1,6 @@
+import API_BASE_URL from "./config";
+
+
 window.initClienteScreen = async () => {
 
   const token = localStorage.getItem("token");
@@ -11,7 +14,7 @@ window.initClienteScreen = async () => {
   if (!clienteId) return;
 
   // ===== CLIENTE =====
-  const c = await fetch(`http://44.202.184.61/admin/clientes/${clienteId}`, {
+  const c = await fetch(`${API_BASE_URL}/admin/clientes/${clienteId}`, {
   headers: {
     "Authorization": `Bearer ${token}`
   }
@@ -33,7 +36,7 @@ window.initClienteScreen = async () => {
   if (editNombre) editNombre.value = c.nombre;
 
   // ===== VEHÍCULOS =====
-  const vehiculos = await fetch(`http://44.202.184.61/admin/vehiculos/cliente/${clienteId}`, {
+  const vehiculos = await fetch(`${API_BASE_URL}/admin/vehiculos/cliente/${clienteId}`, {
   headers: {
     "Authorization": `Bearer ${token}`
   }
@@ -51,7 +54,7 @@ window.initClienteScreen = async () => {
   }
 
   // ===== LLANTAS =====
-  const llantas = await fetch(`http://44.202.184.61/admin/llantas/cliente/${clienteId}`, {
+  const llantas = await fetch(`${API_BASE_URL}/admin/llantas/cliente/${clienteId}`, {
   headers: {
     "Authorization": `Bearer ${token}`
   }
@@ -89,8 +92,8 @@ window.initClienteScreen = async () => {
   // ===== GUARDAR VARIABLES CLIENTE =====
   window.guardarVariableCliente = async () => {
     const bulkEndpoints = {
-      vehiculos: `http://44.202.184.61/admin/vehiculos/bulk-insert/${clienteId}`,
-      llantas: `http://44.202.184.61/admin/llantas/bulk-insert/${clienteId}`
+      vehiculos: `${API_BASE_URL}/admin/vehiculos/bulk-insert/${clienteId}`,
+      llantas: `${API_BASE_URL}/admin/llantas/bulk-insert/${clienteId}`
     };
 
     try {
@@ -113,7 +116,7 @@ window.initClienteScreen = async () => {
       // ===== MANUAL =====
       if (!modalState.bulk) {
         if (modalState.tipo === "vehiculos") {
-          await fetch("http://44.202.184.61/admin/vehiculos/", {
+          await fetch(`${API_BASE_URL}/admin/vehiculos/`, {
             method: "POST",
               headers: {
               "Authorization": `Bearer ${token}`,
@@ -140,7 +143,7 @@ window.initClienteScreen = async () => {
             return;
           }
 
-          await fetch("http://44.202.184.61/admin/llantas/", {
+          await fetch(`${API_BASE_URL}/admin/llantas/` , {
             method: "POST",
               headers: {
                 "Authorization": `Bearer ${token}`,
