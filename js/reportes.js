@@ -8,6 +8,16 @@ function initReportes() {
     return;
   }
 
+  document.querySelectorAll("[data-tipo]").forEach(btn => {
+    btn.onclick = () => {
+        window.openModal({
+        entity: "reportes",
+        tipo: btn.dataset.tipo,
+        bulk: btn.dataset.bulk === null
+        });
+    };
+  });
+
   const reportesBody = document.getElementById("reportesBody");
 
   async function cargarReportes() {
@@ -86,4 +96,53 @@ document.getElementById("confirmExportBtn").onclick = async () => {
   window.URL.revokeObjectURL(url);
 
   closeExportModal();
+};
+
+window.guardarReporte = async () => {
+    // 1. Obtener valores de texto/fecha
+    const nombre = document.getElementById("reporteNombreInput").value.trim();
+    const fecha = document.getElementById("reporteFechaInput").value;
+    const token = localStorage.getItem("token");
+    const file = modalState.file;
+
+    // 2. Obtener IDs usando tu función utilitaria
+    const cliente_id = getIdFromDatalist("reporteClienteInput", "reporteClientesList");
+
+    // Validación
+    if (!nombre || !cliente_id || !file || !fecha) {
+        return alert("Por favor complete el nombre, la fecha y seleccione un cliente válido de la lista.");
+    }
+
+    // 3. Preparar el FormData para el API
+    const fd = new FormData();
+    fd.append("file", file);
+    fd.append("cliente_id", cliente_id); // El UUID obtenido del datalist
+    fd.append("nombre", nombre);
+    fd.append("fecha_revision", fecha);
+    fd.append("observacion", "Carga desde Kartex");
+
+    try {
+        const res = await fetch(`${window.API_BASE_URL}/admin/reportes/`, {
+            method: "POST",
+            headers: { 
+                "Authorization": `Bearer ${token}` 
+                // IMPORTANTE: No pongas Content-Type, el navegador lo pondrá con el boundary correcto
+            },
+            body: fd 
+        });
+
+        if (res.ok) {
+            const data = await res.json();
+            alert(`Reporte "${nombre}" cargado con éxito.`);
+            closeModal();
+            if (window.initReportes) window.initReportes(); 
+        } else {
+            const errorData = await res.json();
+            console.error("Error API:", errorData);
+            alert("Error al cargar el reporte: " + (errorData.detail || "Error desconocido"));
+        }
+    } catch (e) {
+        console.error("Error de conexión:", e);
+        alert("Error de conexión con el servidor");
+    }
 };

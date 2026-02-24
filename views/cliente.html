@@ -1,13 +1,30 @@
 <div class="content-wrapper animate-fade-in">
-
   <div class="breadcrumb" id="breadcrumb"></div>
 
-  <section class="cliente-info">
-    <div>
-      <h2 id="clienteNombre"></h2>
-      <p>NIT: <span id="clienteNit"></span></p>
+  <header class="client-profile-header">
+    <div class="profile-main">
+      <div class="profile-icon">
+        <i class="fa-solid fa-building"></i>
+      </div>
+      <div class="profile-text">
+        <div class="name-row">
+          <h2 id="clienteNombre">Cargando...</h2>
+          <button class="btn-edit-inline" onclick="openEditClienteModal()" title="Editar información">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </button>
+        </div>
+        <div class="profile-info-pills">
+          <span class="pill">
+            <i class="fa-solid fa-id-card"></i> NIT: <strong id="clienteNit">---</strong>
+          </span>
+          <span class="pill status-active">
+            <i class="fa-solid fa-circle-check"></i> Activo
+          </span>
+        </div>
+      </div>
     </div>
-  </section>
+    
+  </header>
 
   <div class="horizontal-sections">
 
@@ -15,7 +32,8 @@
     <section class="section section-flex">
       <div class="section-header">
         <h3>Vehículos</h3>
-        <div class="actions">
+
+        <!-- <div class="actions">
           <button
             class="btn btn-secondary"
             data-entity="clientes_variables"
@@ -32,7 +50,8 @@
           >
             + Vehículo
           </button>
-        </div>
+        </div> -->
+
       </div>
 
       <div class="table-wrapper scrollable">
@@ -41,6 +60,8 @@
             <tr>
                 <th>Codigo</th>
                 <th>No Llantas</th>
+                <th>Tipo</th>
+                <th>Marca</th>                
                 <th class="text-center">Estado</th>
 
             </tr>
@@ -55,7 +76,7 @@
     <section class="section section-flex">
       <div class="section-header">
         <h3>Llantas</h3>
-        <div class="actions">
+        <!-- <div class="actions">
           <button
             class="btn btn-secondary"
             data-entity="clientes_variables"
@@ -72,7 +93,7 @@
           >
             + Llanta
           </button>
-        </div>
+        </div> -->
       </div>
 
 
@@ -84,9 +105,9 @@
                 <th>Marca</th>
                 <th>Diseno</th>
                 <th>Dimension</th>
-                <th>ConvRadial</th>
+                <th>Tipo</th>
                 <th>Montaje</th>
-                <th>Estado</th>                
+                <th class="text-center">Estado</th>
             </tr>
           </thead>
           <tbody id="llantasBody"></tbody>

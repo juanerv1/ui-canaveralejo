@@ -5,7 +5,8 @@
     <title>Dashboard Llantas</title>
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
+    <link rel="icon" type="image/x-icon" href="llanta-de-carro.png">
+  </head>
 
 <body>
 <div class="layout">
@@ -64,27 +65,50 @@
       <h3 id="modalTitle"></h3>
 
       <!-- CLIENTE -->
-      <div id="manualClientSection" class="form-grid" style="display:none">
-        <div>
-          <label>Nombre</label>
-          <input type="text" id="clienteNombreInput" autocomplete="off" />
+      <div id="manualClientSection" style="display:none">
+        <input type="hidden" id="editClienteId" /> <div class="form-grid">
+          <div>
+            <label>Nombre</label>
+            <input type="text" id="clienteNombreInput" autocomplete="off" />
+          </div>
+          <div>
+            <label>NIT</label>
+            <input type="text" id="clienteNitInput" autocomplete="off" />
+          </div>
         </div>
-        <div>
-          <label>NIT</label>
-          <input type="text" id="clienteNitInput" autocomplete="off" />
+
+        <div id="editClientActions" style="display:none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
+          <button id="eliminarClienteBtn" class="btn btn-danger" style="width: 100%;">
+            <i class="fas fa-trash"></i> Eliminar Cliente
+          </button>
         </div>
       </div>
 
       <!-- VEHICULO -->
       <div id="manualVehiculoSection" class="form-grid" style="display:none">
+        
         <div>
           <label>Código vehículo</label>
           <input type="text" id="vehiculoCodigoInput" autocomplete="off" />
         </div>
+
         <div>
           <label>No. llantas</label>
           <input type="number" id="vehiculoLlantasInput" min="0" />
+        </div>    
+
+        <div>
+          <label>Tipo</label>
+          <input type="text" id="vehiculoTipoInput" list="vehiculoTipoList" autocomplete="off" />
+          <datalist id="vehiculoTipoList"></datalist>
         </div>
+
+        <div>
+          <label>Marca</label>
+          <input type="text" id="vehiculoMarcaInput" list="vehiculoMarcaList" autocomplete="off" />
+          <datalist id="vehiculoMarcaList"></datalist>
+        </div>
+
       </div>
 
       <!-- LLANTA -->
@@ -113,11 +137,9 @@
         </div>
 
         <div>
-          <label>Construcción</label>
-          <select id="convRadialSelect">
-            <option value="R">Radial</option>
-            <option value="C">Convexa</option>
-          </select>
+          <label>Tipo</label>
+          <input type="text" id="llantaTipoInput" list="tipoLlantaList" autocomplete="off" />
+          <datalist id="tipoLlantaList"></datalist>
         </div>
 
         <div>
@@ -128,8 +150,39 @@
       </div>
 
       <div id="catalogoSimpleFields" style="display:none">
+        <input type="hidden" id="catalogIdInput" />
+        
         <label id="catalogLabel">Nombre</label>
-        <input type="text" id="catalogNombreInput" />
+        <input type="text" id="catalogNombreInput" class="form-control" />
+        
+        <div id="editActions" style="display:none; margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;">
+          <p id="deleteWarning" style="color: red; font-size: 0.8em;"></p>
+          <button id="eliminarVariableBtn" class="btn btn-danger" style="width: 100%;">
+            <i class="fas fa-trash"></i> Eliminar Registro
+          </button>
+        </div>
+      </div>
+
+      <div id="manualReporteSection" class="form-grid" style="display:none">
+        <div style="grid-column: span 2;">
+            <label>Nombre del Reporte</label>
+            <input type="text" id="reporteNombreInput" placeholder="Ej: Revisión Flota Enero" autocomplete="off" />
+        </div>
+        
+      <div>
+          <label>Cliente</label>
+          <input type="text" 
+                id="reporteClienteInput" 
+                list="reporteClientesList" 
+                placeholder="Buscar cliente..." 
+                autocomplete="off" />
+          <datalist id="reporteClientesList"></datalist>
+      </div>
+
+        <div>
+            <label>Fecha de Revisión</label>
+            <input type="date" id="reporteFechaInput" />
+        </div>
       </div>
 
       <!-- CSV -->

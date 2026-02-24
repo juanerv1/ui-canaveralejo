@@ -57,7 +57,7 @@ async function loadPage(page) {
 
     viewTitle.innerText =
       page === "cliente"
-        ? "Cliente"
+        ? "Detalles Cliente"
         : page.charAt(0).toUpperCase() + page.slice(1);
 
     if (page === "home" && window.initHome) initHome();
@@ -105,23 +105,33 @@ document.addEventListener("click", e => {
   window.location.hash = `#/${link.dataset.page}`;
 });
 
-window.addEventListener("hashchange", handleHashRoute);
 
-// Inicial
-document.addEventListener("DOMContentLoaded", () => {
-  // 🔐 protección global
-  if (!isLogged()) {
-    redirectToLogin();
-    return;
-  }
+// Variable para evitar doble ejecución
+let isInitialLoad = true;
 
-  if (!window.location.hash) {
-    window.location.hash = "#/home";
-  } else {
-    handleHashRoute();
-  }
+document.addEventListener("DOMContentLoaded", async () => {
+    if (!isLogged()) {
+        redirectToLogin();
+        return;
+    }
+
+    await loadUserSidebar();
+
+    // Si no hay hash, ponemos el home
+    if (!window.location.hash || window.location.hash === "#/") {
+        window.location.hash = "#/home";
+    } else {
+        // Si YA hay un hash (ej: refrescaste en la ficha de cliente)
+        // ejecutamos la ruta UNA SOLA VEZ
+        handleHashRoute();
+    }
+    
+    // Bajamos la bandera después de un pequeño delay para ignorar rebotes de eventos
+    setTimeout(() => { isInitialLoad = false; }, 100);
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  loadUserSidebar();
+// Modifica tu listener de hashchange para que respete el semáforo
+window.addEventListener("hashchange", () => {
+    if (isInitialLoad) return; 
+    handleHashRoute();
 });

@@ -1,40 +1,26 @@
 <div class="content-wrapper animate-fade-in">
 
   <div class="home-header">
-    <h1 class="text-gradient">Variables</h2>
+    <h1 class="text-gradient">Variables</h1>
     <p class="subtitle">
-      Panel de administracion de variables de llantas, marcas, diseños y dimensiones
+      Panel de administración de variables de llantas y vehículos
     </p>
   </div>
 
+  <h2 class="section-title">Variables de Llantas</h2>
   <div class="horizontal-sections">
-
-    <!-- Marcas -->
     <section class="section section-flex">
       <div class="section-header">
         <h3>Marcas</h3>
-          <div class="actions">
-            <button
-              class="btn btn-secondary"
-              data-entity="variables"
-              data-tipo="marca"
-              data-bulk="true"
-            >
-              📁 CSV
-            </button>
-
-            <button
-              class="btn btn-primary"
-              data-entity="variables"
-              data-tipo="marca"
-              data-bulk="false"
-            >
-              + Agregar
-            </button>
-          </div>
-
+        <div class="actions">
+          <button class="btn btn-secondary" data-entity="variables" data-tipo="marcas" data-bulk="true">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-primary" data-entity="variables" data-tipo="marcas" data-bulk="false">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
       </div>
-
       <div class="table-wrapper scrollable">
         <table class="data-table">
           <tbody id="marcasBody"></tbody>
@@ -42,31 +28,18 @@
       </div>
     </section>
 
-    <!-- Diseños -->
     <section class="section section-flex">
       <div class="section-header">
         <h3>Diseños</h3>
-          <div class="actions">
-            <button
-              class="btn btn-secondary"
-              data-entity="variables"
-              data-tipo="diseno"
-              data-bulk="true"
-            >
-              📁 CSV
-            </button>
-
-            <button
-              class="btn btn-primary"
-              data-entity="variables"
-              data-tipo="diseno"
-              data-bulk="false"
-            >
-              + Agregar
-            </button>
-          </div>
+        <div class="actions">
+          <button class="btn btn-secondary" data-entity="variables" data-tipo="disenos" data-bulk="true">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-primary" data-entity="variables" data-tipo="disenos" data-bulk="false">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
       </div>
-
       <div class="table-wrapper scrollable">
         <table class="data-table">
           <tbody id="disenosBody"></tbody>
@@ -74,31 +47,18 @@
       </div>
     </section>
 
-    <!-- Dimensiones -->
     <section class="section section-flex">
       <div class="section-header">
         <h3>Dimensiones</h3>
-          <div class="actions">
-            <button
-              class="btn btn-secondary"
-              data-entity="variables"
-              data-tipo="dimension"
-              data-bulk="true"
-            >
-              📁 CSV
-            </button>
-
-            <button
-              class="btn btn-primary"
-              data-entity="variables"
-              data-tipo="dimension"
-              data-bulk="false"
-            >
-              + Agregar
-            </button>
-          </div>
+        <div class="actions">
+          <button class="btn btn-secondary" data-entity="variables" data-tipo="dimensiones" data-bulk="true">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-primary" data-entity="variables" data-tipo="dimensiones" data-bulk="false">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
       </div>
-
       <div class="table-wrapper scrollable">
         <table class="data-table">
           <tbody id="dimensionesBody"></tbody>
@@ -106,5 +66,70 @@
       </div>
     </section>
 
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Tipos</h3>
+        <div class="actions">
+          <button class="btn btn-secondary" data-entity="variables" data-tipo="tipo_llanta" data-bulk="true">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-primary" data-entity="variables" data-tipo="tipo_llanta" data-bulk="false">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <tbody id="tipoLlantaBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <hr class="section-divider">
+
+  <h2 class="section-title">Variables de Vehículos</h2>
+  <div class="horizontal-sections">
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Tipos</h3>
+        <div class="actions">
+          <button class="btn btn-secondary" data-entity="variables" data-tipo="tipos_vehiculos" data-bulk="true">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-primary" data-entity="variables" data-tipo="tipos_vehiculos" data-bulk="false">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <tbody id="tipoVehiculoBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section section-flex">
+      <div class="section-header">
+        <h3>Marcas</h3>
+        <div class="actions">
+          <button class="btn btn-secondary" data-entity="variables" data-tipo="marcas_vehiculos" data-bulk="true">
+            <i class="fas fa-file-csv"></i> CSV
+          </button>
+          <button class="btn btn-primary" data-entity="variables" data-tipo="marcas_vehiculos" data-bulk="false">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+      <div class="table-wrapper scrollable">
+        <table class="data-table">
+          <tbody id="marcaVehiculoBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section section-flex"></section>
+
+    <section class="section section-flex"></section>
   </div>
 </div>

@@ -43,6 +43,10 @@ guardarBtn.onclick = async () => {
   if (modalState.entity === "clientes_variables" && window.guardarVariableCliente) {
     await window.guardarVariableCliente();
   }
+
+  if (modalState.entity === "reportes") {
+    await window.guardarReporte();
+  }
 };
 
 
@@ -69,37 +73,42 @@ dropZone.addEventListener("drop", e => {
 // ===============================
 // modal.js — FIX COMPLETO
 
-// ================= openModal =================
 
 // ================= openModal =================
 window.openModal = ({ entity, tipo = null, bulk = false }) => {
-  console.log("OPEN MODAL:", { entity, tipo, bulk });
+  // 1. PRIMERO LIMPIAMOS TODO
+  resetModalForm();
 
+  console.log("OPEN MODAL:", { entity, tipo, bulk });
   modalState = { entity, tipo, bulk, file: null };
 
   const modalOverlay = document.getElementById("modalOverlay");
   const modalTitle   = document.getElementById("modalTitle");
 
+  // Referencias a secciones
   const manualClientSection   = document.getElementById("manualClientSection");
   const manualVehiculoSection = document.getElementById("manualVehiculoSection");
   const manualLlantaSection   = document.getElementById("manualLlantaSection");
   const catalogoSimpleFields  = document.getElementById("catalogoSimpleFields");
   const fileSection           = document.getElementById("fileSection");
+  const manualReporteSection  = document.getElementById("manualReporteSection");
 
-  // ---- ocultar todo ----
-  manualClientSection   && (manualClientSection.style.display = "none");
-  manualVehiculoSection && (manualVehiculoSection.style.display = "none");
-  manualLlantaSection   && (manualLlantaSection.style.display = "none");
-  catalogoSimpleFields  && (catalogoSimpleFields.style.display = "none");
-  fileSection           && (fileSection.style.display = "none");
-
-  // ---- BULK ----
+  // ==========================================
+  // CASO 1: IMPORTACIÓN MASIVA (CSV)
+  // Funciona para tus botones: "📁 CSV" (Vehículos y Llantas)
+  // ==========================================
   if (bulk) {
-    fileSection && (fileSection.style.display = "block");
+    if (fileSection) fileSection.style.display = "block";
+    
+    // El título se adaptará: "Importar vehiculos" o "Importar llantas"
     modalTitle.innerText = `Importar ${tipo ?? entity}`;
     modalOverlay.style.display = "flex";
-    return;
+    return; // Terminamos aquí si es bulk
   }
+
+  // ==========================================
+  // CASO 2: FORMULARIOS MANUALES
+  // ==========================================
 
   // ---- CLIENTES ----
   if (entity === "clientes") {
@@ -107,87 +116,107 @@ window.openModal = ({ entity, tipo = null, bulk = false }) => {
     modalTitle.innerText = "Nuevo Cliente";
   }
 
-  // ---- CLIENTE → VEHÍCULOS ----
+  // ---- VEHÍCULOS (Botón: "+ Vehículo") ----
+  // Tu lógica original intacta:
   if (entity === "clientes_variables" && tipo === "vehiculos") {
     manualVehiculoSection.style.display = "grid";
     modalTitle.innerText = "Nuevo Vehículo";
+    // Inicializar autocompletado si existe la función
+    if (typeof initVehiculoAutocomplete === 'function') initVehiculoAutocomplete();
   }
 
-  // ---- CLIENTE → LLANTAS ----
+  // ---- LLANTAS (Botón: "+ Llanta") ----
+  // Tu lógica original intacta:
   if (entity === "clientes_variables" && tipo === "llantas") {
     manualLlantaSection.style.display = "grid";
     modalTitle.innerText = "Nueva Llanta";
-    initLlantaAutocomplete && initLlantaAutocomplete();
+    // Inicializar autocompletado si existe la función
+    if (typeof initLlantaAutocomplete === 'function') initLlantaAutocomplete();
   }
 
-  // ---- VARIABLES GENERALES ----
+  // ---- VARIABLES GENERALES (Marcas, Diseños, etc.) ----
   if (entity === "variables") {
     catalogoSimpleFields.style.display = "block";
+    modalTitle.innerText = `Nueva ${tipo}`; // Simplificado, o usa tu switch original
 
-    modalTitle.innerText =
-      tipo === "marca"     ? "Nueva Marca" :
-      tipo === "diseno"    ? "Nuevo Diseño" :
-      tipo === "dimension" ? "Nueva Dimensión" :
-      "Nueva Variable";
-
+    // Actualizar el label del input genérico
     const label = document.getElementById("catalogLabel");
     if (label) {
-      label.innerText =
-        tipo === "marca"     ? "Marca" :
-        tipo === "diseno"    ? "Diseño" :
-        "Dimensión";
+      label.innerText = (tipo === "marcas") ? "Marca" : 
+                        (tipo === "disenos") ? "Diseño" : "Nombre";
     }
   }
 
+  // ---- REPORTES ----
+  if (entity === "reportes") {
+    modalTitle.innerText = "Cargar Nuevo Reporte (Kardex)";
+    manualReporteSection.style.display = "grid";
+    fileSection.style.display = "block"; 
+    cargarClientesDatalist(); 
+  }
+
+  // Mostrar el modal
   modalOverlay.style.display = "flex";
 };
 
-
+// Función auxiliar interna para reportes
+async function cargarClientesDatalist() {
+  try {
+    const token = localStorage.getItem("token");
+    const res = await fetch(`${window.API_BASE_URL}/admin/clientes/`, {
+        headers: { "Authorization": `Bearer ${token}` }
+    });
+    if (res.ok) {
+        const clientes = await res.json();
+        const list = document.getElementById("reporteClientesList");
+        if(list) list.innerHTML = clientes.map(c => `<option data-id="${c.id}" value="${c.nombre}">`).join("");
+    }
+  } catch(e) { console.error(e); }
+}
 
 // ================= closeModal =================
 window.closeModal = () => {
-  const modalOverlay = document.getElementById("modalOverlay");
-
-  const fileInput = document.getElementById("fileInput");
-  const fileName  = document.getElementById("fileName");
-
-  [
-    "clienteNombreInput",
-    "clienteNitInput",
-    "vehiculoCodigoInput",
-    "vehiculoLlantasInput",
-    "llantaCodigoInput",
-    "marcaInput",
-    "disenoInput",
-    "dimensionInput",
-    "catalogNombreInput",
-    "input-date"
-  ].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.value = "";
-  });
-
-  if (fileInput) fileInput.value = "";
-  if (fileName) fileName.innerText = "";
-
-  modalState.file = null;
-  modalOverlay.style.display = "none";
+  // Solo llamamos al reset y cerramos
+  resetModalForm();
+  document.getElementById("modalOverlay").style.display = "none";
 };
 
+// Función auxiliar para limpiar el modal completamente antes de usarlo
+const resetModalForm = () => {
+  const modal = document.getElementById("modalOverlay");
+  
+  // 1. Limpiar todos los inputs
+  modal.querySelectorAll("input").forEach(input => input.value = "");
+  
+  // 2. Limpiar textos informativos
+  const fileName = document.getElementById("fileName");
+  const deleteWarning = document.getElementById("deleteWarning");
+  if (fileName) fileName.innerText = "";
+  if (deleteWarning) deleteWarning.innerText = "";
 
-// ===============================
-// CLICK GLOBAL
-// ===============================
-document.addEventListener("click", e => {
-  const btn = e.target.closest("[data-entity]");
-  if (!btn) return;
+  // 3. Ocultar botones de edición/eliminar
+  const editActions = document.getElementById("editActions");
+  const editClientActions = document.getElementById("editClientActions");
+  if (editActions) editActions.style.display = "none";
+  if (editClientActions) editClientActions.style.display = "none";
 
-  openModal({
-    entity: btn.dataset.entity,
-    tipo: btn.dataset.tipo ?? null,
-    bulk: btn.dataset.bulk === "true"
+  // 4. Ocultar TODAS las secciones (para luego mostrar solo la correcta)
+  [
+    "manualClientSection", 
+    "manualVehiculoSection", 
+    "manualLlantaSection", 
+    "catalogoSimpleFields", 
+    "fileSection",
+    "manualReporteSection"
+  ].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = "none";
   });
-});
+
+  // 5. Resetear estado
+  modalState = { entity: null, tipo: null, bulk: false, file: null };
+};
+
 
 // AUTOCOMPLETE (CATÁLOGOS) — FIX con data-id
 async function cargarAutocomplete(url, datalistId, campo) {
@@ -216,25 +245,21 @@ async function cargarAutocomplete(url, datalistId, campo) {
 
 // INIT AUTOCOMPLETE LLANTA
 function initLlantaAutocomplete() {
-  cargarAutocomplete(
-    `${window.API_BASE_URL}/admin/catalogos/marcas`,
-    "marcasList",
-    document.getElementById("marcaInput")
-  );
+  const base = `${window.API_BASE_URL}/admin/catalogos`;
 
-  cargarAutocomplete(
-    `${window.API_BASE_URL}/admin/catalogos/disenos`,
-    "disenosList",
-    document.getElementById("disenoInput")
-  );
-
-  cargarAutocomplete(
-    `${window.API_BASE_URL}/admin/catalogos/dimensiones`,
-    "dimensionesList",
-    document.getElementById("dimensionInput")
-  );
+  cargarAutocomplete(`${base}/marcas`, "marcasList", document.getElementById("marcaInput"));
+  cargarAutocomplete(`${base}/disenos`, "disenosList", document.getElementById("disenoInput"));
+  cargarAutocomplete(`${base}/dimensiones`, "dimensionesList", document.getElementById("dimensionInput"));
+  cargarAutocomplete(`${base}/tipo_llanta`, "tipoLlantaList", document.getElementById("llantaTipoInput"));
 }
 
+// INIT AUTOCOMPLETE VEHÍCULO
+function initVehiculoAutocomplete() {
+  const base = `${window.API_BASE_URL}/admin/catalogos`;
+
+  cargarAutocomplete(`${base}/tipos_vehiculos`, "vehiculoTipoList", document.getElementById("vehiculoTipoInput"));
+  cargarAutocomplete(`${base}/marcas_vehiculos`, "vehiculoMarcaList", document.getElementById("vehiculoMarcaInput"));
+}
 
 function getIdFromDatalist(inputId, listId) {
   const input = document.getElementById(inputId);

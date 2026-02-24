@@ -576,3 +576,106 @@ label {
   margin: 0;
   color: #FFFFFF;
 }
+
+.client-profile-header {
+    background: #ffffff;
+    padding: 1.5rem 2rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-left: 6px solid #4f46e5; /* Color primario */
+}
+
+.profile-main {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* Icono del Edificio/Empresa */
+.profile-icon {
+    width: 60px;
+    height: 60px;
+    background: #f3f4f6;
+    color: #4f46e5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.name-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.name-row h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: #111827;
+    font-weight: 700;
+}
+
+/* Botón Editar Minimalista */
+.btn-edit-inline {
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-edit-inline:hover {
+    color: #4f46e5;
+    transform: scale(1.1);
+}
+
+/* Pills (Etiquetas) de información */
+.profile-info-pills {
+    display: flex;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.pill {
+    background: #f3f4f6;
+    color: #4b5563;
+    padding: 4px 12px;
+    border-radius: 9999px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pill.status-active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.profile-stats {
+    text-align: right;
+    color: #9ca3af;
+    font-style: italic;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+/* Asegura que el fileSection ocupe todo el ancho si está debajo */
+#fileSection {
+    margin-top: 10px;
+    grid-column: span 2;
+}
